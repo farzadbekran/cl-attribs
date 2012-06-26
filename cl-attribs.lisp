@@ -2,8 +2,6 @@
 
 (in-package #:cl-attribs)
 
-(export '(attributes-class attributes-object slot-attrib slot-attribs))
-
 (defun pairup-list (list)
   "returns a list containing lists with length of 2, made from the original list"
   (loop
