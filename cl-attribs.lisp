@@ -3,15 +3,10 @@
 (in-package #:cl-attribs)
 
 (defun pairup-list (list)
-  "returns a list containing lists with length of 2, made from the original list"
-  (loop
-     with results = nil
-     with counter = 0
-     while (<= counter (- (length list) 2))
-     do
-       (push (list (nth counter list) (nth (1+ counter) list)) results)
-       (setf counter (+ counter 2))
-     finally (return (reverse results))))
+  "returns a list containing lists with length of 2, made from the original list. ignores the last element if the length is odd."
+  (if (>= (length list) 2)
+      (cons (list (first list) (second list)) (pairup-list (subseq list 2)))
+      (values)))
 
 (defclass attributed-direct-slot (closer-mop:standard-direct-slot-definition)
   ((attributes :accessor attributes :initarg :attributes :initform nil)))
@@ -33,6 +28,7 @@
   (or (typep slot 'attributed-direct-slot)
       (typep slot 'attributed-effective-slot)))
 
+;computes the final slot for every slot in the definition of the attributes-class
 (defmethod closer-mop:compute-effective-slot-definition ((class attributes-class) name direct-slots)
   (if (every #'attributed-slot-p direct-slots)
       (let ((normal-slot (call-next-method))

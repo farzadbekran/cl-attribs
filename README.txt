@@ -2,7 +2,7 @@ This is free software, do whatever you want with it.
 
 CL-ATTRIBS
 
-Provides a functionality that allows CLOS classes to have attributes specific for each of their slots.
+Provides a functionality that allows CLOS objects to have attributes specific for each of their slots.
 These attributes are saved in a auto generated slot called %all-attributes so that name is reserved for the cl-attribs.
 
 -----------------------------------------------------------------------
@@ -35,7 +35,7 @@ CL-ATTRIBS> (defparameter obj (make-instance 'test :slot-a `(:value/attribs "new
 
 -----------------------------------------------------------------------
 
-Reading/Writeing Slot Attributes
+Reading/Writing Slot Attributes
 
 (This is a setfable method)
 
